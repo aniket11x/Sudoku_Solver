@@ -1,52 +1,56 @@
 # Sudoku Solver
 
-A fast and efficient **Sudoku solver** implemented in C++ using the **backtracking algorithm**.
+A C++ implementation of a Sudoku puzzle solver using the **backtracking algorithm**. This program takes an unsolved Sudoku puzzle as input and finds the solution if one exists.
 
-## Description
+## Features
 
-This project solves Sudoku puzzles of any difficulty level. It uses a recursive backtracking approach to fill empty cells while validating against Sudoku rules (no duplicates in rows, columns, or 3×3 boxes).
+- ✅ Solves any valid 9x9 Sudoku puzzle
+- ✅ Uses efficient backtracking algorithm
+- ✅ Validates each number placement against Sudoku rules
+- ✅ Interactive user input for puzzle entry
+- ✅ Formatted output display
 
-## Algorithm
+## How It Works
 
-The solver employs the **Backtracking Algorithm**:
+The solver uses a **backtracking** approach with three validation functions:
 
-1. **Find Empty Cell**: Searches for the first empty cell (represented by 0) in the grid
-2. **Try Numbers**: Attempts to place digits 1-9 in the empty cell
-3. **Validate**: Uses `isSafe()` to check if the placement violates Sudoku rules
-4. **Recurse**: If valid, recursively solves the remaining puzzle
-5. **Backtrack**: If no solution is found, resets the cell and tries the next number
+### 1. **isSafe() Function**
+Validates if placing a number at a specific position is legal by checking:
+- **Row**: No duplicate number in the same row
+- **Column**: No duplicate number in the same column
+- **3x3 Box**: No duplicate number in the same 3x3 grid
 
-### Key Functions
+### 2. **solveSudoku() Function**
+Implements the backtracking algorithm:
+- Finds the first empty cell (value 0)
+- Tries numbers 1-9 in that cell
+- Recursively attempts to solve the remaining puzzle
+- If a solution leads to a dead end, backtracks and tries the next number
+- Returns `true` when the puzzle is completely solved
 
-- **`isSafe()`**: Validates if a number can be placed at a given position
-  - Checks the row for duplicates
-  - Checks the column for duplicates
-  - Checks the 3×3 box for duplicates
+### 3. **printBoard() Function**
+Displays the solved Sudoku grid in a readable format
 
-- **`solveSudoku()`**: Recursively solves the puzzle using backtracking
+## Compilation & Execution
 
-- **`printBoard()`**: Displays the solved Sudoku grid
-
-## Compilation and Execution
-
-### Compile
+### Compile:
 ```bash
 g++ -o sudoku Sudoku.cpp
 ```
 
-### Run
+### Run:
 ```bash
 ./sudoku
 ```
 
-## Input Format
+## Usage
 
-- Enter a 9×9 Sudoku grid
-- Use **0** to represent **empty cells**
-- Use **1-9** for given numbers
-- Numbers should be space-separated or on separate lines
+1. Run the program
+2. Enter the Sudoku grid row by row
+3. Use `0` to represent empty cells
+4. The program will output the solved puzzle or indicate no solution exists
 
-### Example Input
+### Example Input:
 ```
 5 3 0 0 7 0 0 0 0
 6 0 0 1 9 5 0 0 0
@@ -59,11 +63,8 @@ g++ -o sudoku Sudoku.cpp
 0 0 0 0 8 0 0 7 9
 ```
 
-## Output
-
-The program outputs the solved Sudoku grid:
+### Example Output:
 ```
-Solved Sudoku:
 5 3 4 6 7 8 9 1 2
 6 7 2 1 9 5 3 4 8
 1 9 8 3 4 2 5 6 7
@@ -75,37 +76,17 @@ Solved Sudoku:
 3 4 5 2 8 6 1 7 9
 ```
 
-If no solution exists:
-```
-No solution exists
-```
+## Algorithm Complexity
 
-## Time Complexity
-
-- **Best Case**: O(1) - When the puzzle is already solved
-- **Average Case**: O(9^(n×m)) - Where n and m are rows and columns
-- **Space Complexity**: O(1) for the recursion stack (bounded)
-
-## Features
-
-✅ Fast backtracking algorithm  
-✅ Validates against all Sudoku rules  
-✅ Handles multiple difficulty levels  
-✅ Returns solution or reports if no solution exists  
-✅ Efficient 3×3 box validation  
+- **Time Complexity**: O(9^(n×m)) in the worst case, where n×m is the number of empty cells
+  - Average cases are much faster due to pruning
+- **Space Complexity**: O(n×m) for recursion stack
 
 ## Requirements
 
 - C++11 or later
-- g++ or any standard C++ compiler
-
-## Notes
-
-- The solver uses `vector<vector<int>>` for dynamic memory allocation
-- All cells must contain values between 0-9
-- Empty cells must be represented by 0
-- The algorithm guarantees finding a solution if one exists
+- Standard C++ library (`bits/stdc++.h`)
 
 ## License
 
-Open source
+This project is open source and available under the MIT License.
